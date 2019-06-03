@@ -1,8 +1,28 @@
-#include <map>
+#include <unordered_map>
+#include <vector>
 #include <iostream>
 using namespace std;
  
-
+vector<int> twoSum(vector<int>& nums, int target) {
+	vector<int> retval;
+	int complement = 0;
+	unordered_map<int, int> myhash;
+	for(int i = 0; i < nums.size(); i++)
+	{
+		myhash.insert(pair<int, int>(nums[i], i));
+	}
+	for(int i = 0; i < nums.size(); i++)
+	{
+		complement = target - nums[i];
+		if(myhash.count(complement) && i != myhash[complement])
+		{
+			retval.push_back(i);
+			retval.push_back(myhash[complement]);
+			break;
+		}
+	}
+	return retval;
+}
 /*int main()
 {
 	map<int, string> j;
